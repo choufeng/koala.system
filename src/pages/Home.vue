@@ -1,18 +1,16 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App Jon"/>
+    <router-link to="/system/login"><img :src="logo"></router-link>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-import Logo from '../assets/img/logo-1.png'
+import Logo from '../assets/img/logo-2.png'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
   },
   data () {
     return {
@@ -21,3 +19,12 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+.home {
+  height: 100vh;
+  line-height: 100vh;
+  text-align: center;
+  background: #950313;
+}
+</style>
