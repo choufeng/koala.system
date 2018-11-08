@@ -1,7 +1,7 @@
+import mock from './mock/'
 const test = {
-  login: () => {
-    const list = ['post', 'put', 'patch', 'delete']
-    return list
+  login: (data) => {
+    return mock.system.login(data)
   }
 }
 export default test
