@@ -1,5 +1,5 @@
 {
-  "name": "vue3pro",
+  "name": "koala.system",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "element-ui": "^2.4.9",
     "localforage": "^1.7.3",
     "lodash": "^4.17.11",
