@@ -1,12 +1,12 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import LoginBox from '@/components/LoginBox/LoginBox.vue'
+import LoginPage from '@/pages/Login.vue'
 import ElementUI from 'element-ui'
 const localVue = createLocalVue()
 localVue.use(ElementUI)
 
-describe('LoginBox', () => {
+describe('Login', () => {
   it('has username and password', () => {
-    const wp = shallowMount(LoginBox, {
+    const wp = shallowMount(LoginPage, {
       localVue
     })
     expect(wp.vm.$data.modal.username).toBe('')
