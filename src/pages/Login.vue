@@ -10,8 +10,7 @@
             <el-input type="password" placeholder="Password" v-model="modal.password"/>
           </el-form-item>
           <el-form-item>
-            <el-button @click="onSave">Login</el-button>
-            <el-button @click="onClear">Logout</el-button>
+            <el-button @click="onSave" :disabled="disLoginBtn">Login</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -23,6 +22,7 @@
 import { system } from '../services/'
 import { LOGIN_SUCCESS } from '@/consts'
 import localforage from 'localforage'
+import { isEmpty } from 'ramda'
 
 export default {
   data () {
@@ -33,18 +33,21 @@ export default {
       }
     }
   },
+  computed: {
+    disLoginBtn () {
+      return isEmpty(this.modal.username) || isEmpty(this.modal.password)
+    }
+  },
   methods: {
     async onSave () {
       try {
         const res = await system.login(this.modal)
         localforage.setItem('token', res.token)
         this.$message.success(LOGIN_SUCCESS)
+        this.$router.push('/dashboard')
       } catch (err) {
         this.$message.error(err.message)
       }
-    },
-    onClear () {
-      localforage.clear('token')
     }
   }
 }
