@@ -4,13 +4,13 @@
       <el-col :span="24">
         <el-form>
           <el-form-item>
-            <el-input placeholder="Username" v-model="modal.username"/>
+            <el-input placeholder="Username" v-model="modal.username" ref="inputUsername"/>
           </el-form-item>
           <el-form-item>
             <el-input type="password" placeholder="Password" v-model="modal.password"/>
           </el-form-item>
           <el-form-item>
-            <el-button @click="onSave" :disabled="disLoginBtn">Login</el-button>
+            <el-button type="primary" @click="onSave" :disabled="disLoginBtn">Login</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -37,6 +37,9 @@ export default {
     disLoginBtn () {
       return isEmpty(this.modal.username) || isEmpty(this.modal.password)
     }
+  },
+  mounted () {
+    this.$refs.inputUsername.focus()
   },
   methods: {
     async onSave () {
