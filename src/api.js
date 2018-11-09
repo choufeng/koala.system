@@ -1,5 +1,5 @@
 import axios from 'axios'
-import config from './config'
+import config from './config/config'
 import qs from 'qs'
 import { lt, indexOf, not, isNil } from 'ramda'
 import localforage from 'localforage'

@@ -36,6 +36,26 @@ export default new Router({
           path: 'dashboard',
           name: 'dashboard',
           component: () => import('./pages/Dashboard')
+        },
+        {
+          path: 'group',
+          name: 'group',
+          component: () => import('./pages/Dashboard')
+        },
+        {
+          path: 'manager',
+          name: 'manager',
+          component: () => import('./pages/Dashboard')
+        },
+        {
+          path: 'category',
+          name: 'category',
+          component: () => import('./pages/Dashboard')
+        },
+        {
+          path: 'article',
+          name: 'article',
+          component: () => import('./pages/Dashboard')
         }
       ]
     }
