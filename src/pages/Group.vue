@@ -4,23 +4,38 @@
       <div slot="title" class="box-title text-left pl1">权限组列表</div>
       <div class="body">
         <el-table
-          :data="tableData3"
+          :data="list"
           height="80vh"
           border
+          :default-sort="{prop: 'id', order: 'ascending'}"
           style="width: 100%">
           <el-table-column
-            prop="date"
-            label="日期"
-            width="180">
+            prop="id"
+            label="ID"
+            sortable
+            width="80">
           </el-table-column>
           <el-table-column
             prop="name"
-            label="姓名"
+            label="组名称"
             width="180">
           </el-table-column>
           <el-table-column
-            prop="address"
-            label="地址">
+            prop="description"
+            label="简介">
+          </el-table-column>
+          <el-table-column label="操作"
+            width="150"
+            >
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              <el-button
+                size="mini"
+                type="danger"
+                @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -30,25 +45,30 @@
 
 <script>
 import { PanelBox } from '@/components'
+import { group } from '@/services'
 export default {
   components: {
     PanelBox
   },
   data() {
     return {
-      tableData3: [{
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }]
+      list: []
+    }
+  },
+  mounted () {
+    this.loadList()
+  },
+  methods: {
+    async loadList () {
+      try {
+        this.list = await group.list()
+      } catch (err) {
+        this.$message.error('载入列表出现错误')
+        console.log('Load list Error:', err)
+      }
+    },
+    handleEdit(a, b) {
+      console.log(a, b)
     }
   }
 }
