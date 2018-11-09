@@ -40,7 +40,7 @@ export default new Router({
         {
           path: 'group',
           name: 'group',
-          component: () => import('./pages/Dashboard')
+          component: () => import('./pages/Group')
         },
         {
           path: 'manager',

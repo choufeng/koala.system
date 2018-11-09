@@ -31,7 +31,6 @@ export default {
     height: 100vh;
     color: #fff;
     width: 3rem;
-    border: 1px solid #000;
   }
   .left::-webkit-scrollbar {
     width: 0;
@@ -40,6 +39,12 @@ export default {
     background: #FFF;
     padding: 0;
     border-bottom: 1px solid #DCDFE6;
+  }
+  .main {
+    height: 94vh;
+    max-height: 94vh;
+    background: #f0f2f5;
+    overflow: hidden;
   }
 }
 </style>
