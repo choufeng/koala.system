@@ -1,5 +1,5 @@
 import axios from 'axios'
-import config from './config'
+import config from './config/config'
 import qs from 'qs'
 import { lt, indexOf, not, isNil } from 'ramda'
 import localforage from 'localforage'
@@ -37,7 +37,7 @@ const $axios = (options) => {
         // 针对token做处理
         try {
           const token = await localforage.getItem('token')
-          if (not(isNil(res))) {
+          if (not(isNil(token))) {
             config.headers['Authorization'] = `Bearer ${token}`
           }
           return config
