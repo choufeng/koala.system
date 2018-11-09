@@ -43,7 +43,7 @@ export default {
   .main {
     height: 94vh;
     max-height: 94vh;
-    background: #f0f2f5;
+    background: #ecebe3;
     overflow: hidden;
   }
 }
