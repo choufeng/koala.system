@@ -49,6 +49,7 @@
 </template>
 <script charset="utf-8">
 import { mapActions, mapState } from 'vuex'
+import { assoc } from 'ramda'
 export default {
   data () {
     return {
@@ -61,7 +62,7 @@ export default {
     list: state => state.group.list
   }),
   methods: {
-    ...mapActions(['getGroupList']),
+    ...mapActions(['getGroupList', 'setGroupItem', 'deleteGroupItem']),
     async loadList () {
       try {
         await this.getGroupList()
@@ -71,13 +72,14 @@ export default {
       }
     },
     handleNodes (i, item) {
-      console.log(i, item)
+      this.setGroupItem({ index: i, item: assoc('name', `${item.name}1`, item) })
     },
     handleEdit (i, item) {
       console.log(i, item)
     },
     handleDelete (i, item) {
       console.log(i, item)
+      this.deleteGroupItem(i)
     }
   }
 }

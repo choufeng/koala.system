@@ -3,7 +3,7 @@
     <panel-box>
       <div slot="header-left" class="box-title text-left pl1">权限组列表</div>
       <div slot="header-right" class="box-title text-right pr1">
-        <el-button type="primary" icon="el-icon-plus" size="small">添加新权限组</el-button>
+        <el-button type="primary" icon="el-icon-plus" size="small" @click="open">添加新权限组</el-button>
       </div>
       <div class="body">
         <GroupList />
@@ -15,9 +15,16 @@
 <script>
 import { PanelBox, DialogBox } from '@/components'
 import GroupList from './GroupList.vue'
+import { mapActions } from 'vuex'
 export default {
   components: {
     PanelBox, DialogBox, GroupList
+  },
+  methods: {
+    ...mapActions(['addGroupItem']),
+    open () {
+      this.addGroupItem({name: 'good'})
+    }
   }
 }
 </script>
