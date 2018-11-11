@@ -9,21 +9,23 @@
         <GroupList />
       </div>
     </panel-box>
+    <GroupDialog />
   </div>
 </template>
 
 <script>
 import { PanelBox, DialogBox } from '@/components'
 import GroupList from './GroupList.vue'
+import GroupDialog from './GroupDialog.vue'
 import { mapActions } from 'vuex'
 export default {
   components: {
-    PanelBox, DialogBox, GroupList
+    PanelBox, GroupDialog, GroupList
   },
   methods: {
-    ...mapActions(['addGroupItem']),
+    ...mapActions(['openGroupDialog']),
     open () {
-      this.addGroupItem({name: 'good'})
+      this.openGroupDialog()
     }
   }
 }

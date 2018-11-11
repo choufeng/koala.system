@@ -29,7 +29,7 @@ import { equals } from 'ramda'
 import localforage from 'localforage'
 export default {
   methods: {
-    handleCommand(command) {
+    handleCommand (command) {
       equals('setting', command) && this.$router.push('/admin/setting')
       equals('logout') && this.logout()
     },
@@ -37,7 +37,7 @@ export default {
       localforage.clear().then(() => {
         this.$message.success('已退出系统')
         this.$router.replace('/system/login')
-      }).catch(err => {
+      }).catch(() => {
         console.error('清除数据失败')
       })
     }

@@ -2,13 +2,14 @@ import * as types from '../mutation-types'
 import { group } from '@/services'
 import { update, remove, append } from 'ramda'
 const state = {
-  list: []
+  list: [],
+  dialogStatus: false
 }
 
 const getters = {}
 
 const actions = {
-  getGroupList ({ commit, state }) {
+  getGroupList ({ commit, state}) {
     return new Promise((resolve, reject) => {
       group.list().then(result => {
         commit(types.GET_GROUP_LIST_SUCCESS, result)
@@ -19,20 +20,33 @@ const actions = {
       })
     })
   },
-  setGroupItem({ commit, state }, data ) {
+  setGroupItem ({ commit, state }, data ) {
     commit(types.SET_GROUP_ITEM, {
       index: data.index,
       item: data.item
     })
   },
-  deleteGroupItem({ commit, state }, data) {
-    console.log('data')
+  deleteGroupItem ({ commit, state }, data) {
      commit(types.DELETE_GROUP_ITEM, {
        index: data
      })
   },
-  addGroupItem({ commit, state }, data) {
-    commit(types.ADD_GROUP_ITEM, data)
+  addGroupItem ({ commit, state }, data) {
+    return new Promise((resolve, reject) => {
+      group.add(data).then(res => {
+        console.log('state actions success', res)
+        resolve(res)
+      }).catch(err => {
+        console.error('add group item err:', err)
+        reject(err)
+      })
+    })
+  },
+  openGroupDialog ({ commit, state }) {
+    commit(types.OPEN_GROUP_DIALOG)
+  },
+  closeGroupDialog ({ commit, state }) {
+    commit(types.CLOSE_GROUP_DIALOG)
   }
 }
 
@@ -51,6 +65,12 @@ const mutations = {
   },
   [types.ADD_GROUP_ITEM] (state, data) {
     state.list = append(data, state.list)
+  },
+  [types.OPEN_GROUP_DIALOG] (state, data) {
+    state.dialogStatus = true
+  },
+  [types.CLOSE_GROUP_DIALOG] (state, data) {
+    state.dialogStatus = false
   }
 }
 
