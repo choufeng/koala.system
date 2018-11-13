@@ -78,7 +78,6 @@ const $axios = (options) => {
 
 const api = {
   get: (url) => {
-    console.log('test', url)
     return $axios({ url: url, method: 'get' })
   },
   post: (url, data) => {

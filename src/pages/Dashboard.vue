@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <panel-box>
-      <div slot="title" class="box-title text-left pl1">Dashboard</div>
+      <div slot="header-left" class="box-title text-left pl1">Dashboard</div>
       <div class="body">
 
       </div>

@@ -2,10 +2,10 @@
   <div class="panel-box">
     <el-row class="header">
       <el-col :span="20">
-        <slot name="title" />
+        <slot name="header-left" />
       </el-col>
       <el-col :span="4">
-        <slot name="title-right" />
+        <slot name="header-right" />
       </el-col>
     </el-row>
     <el-row>
@@ -23,9 +23,8 @@
 .panel-box {
   border-radius: 5px;
   background: #FFF;
-  border: 1px solid #fafafa;
   .header {
-    border-bottom: 3px solid #f0f2f5;
+    border-bottom: 3px solid #ebece3;
   }
   .content {
   }

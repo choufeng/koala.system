@@ -28,8 +28,8 @@ export default {
   data () {
     return {
       modal: {
-        username: '',
-        password: ''
+        username: 'choufeng',
+        password: '123123'
       }
     }
   },
