@@ -23,8 +23,9 @@ export default {
     PanelBox, GroupDialog, GroupList
   },
   methods: {
-    ...mapActions(['openGroupDialog', 'clearGroupModal']),
+    ...mapActions(['openGroupDialog', 'clearGroupModal', 'setEditIndex']),
     open () {
+      this.setEditIndex(null)
       this.clearGroupModal()
       this.openGroupDialog()
     }

@@ -26,10 +26,7 @@
         width="150"
         >
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="primary"
-            @click="handleNodes(scope.$index, scope.row)">调整</el-button>
+          <group-nodes :value="scope"></group-nodes>
         </template>
       </el-table-column>
       <el-table-column label="操作"
@@ -60,11 +57,12 @@
 import { mapActions, mapState } from 'vuex'
 import { assoc } from 'ramda'
 import DeletePopover from '@/components/DeletePopover'
+import GroupNodes from './GroupNodes.vue'
 import { DONE } from '@/consts'
 
 export default {
   components: {
-    DeletePopover
+    DeletePopover, GroupNodes
   },
   data () {
     return {
@@ -77,7 +75,7 @@ export default {
     list: state => state.group.list
   }),
   methods: {
-    ...mapActions(['getGroupList', 'setGroupItem', 'deleteGroupItem', 'openGroupDialog', 'setGroupModal']),
+    ...mapActions(['getGroupList', 'setGroupItem', 'setEditIndex', 'deleteGroupItem', 'openGroupDialog', 'setGroupModal']),
     async loadList () {
       try {
         await this.getGroupList()
@@ -90,6 +88,7 @@ export default {
       this.setGroupItem({ index: i, item: assoc('name', `${item.name}1`, item) })
     },
     handleEdit (i, item) {
+      this.setEditIndex(i)
       this.setGroupModal(item)
       this.openGroupDialog()
     },

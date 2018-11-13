@@ -7,7 +7,8 @@ const state = {
   modal: {
     name: '',
     description: ''
-  }
+  },
+  editIndex: null
 }
 
 const getters = {}
@@ -27,17 +28,18 @@ const actions = {
   setGroupModal ({ commit, state }, data) {
     commit(types.SET_GROUP_MODAL, data)
   },
+  setEditIndex ({ commit, state }, data) {
+    commit(types.SET_EDIT_INDEX, data)
+  },
   clearGroupModal ({ commit, state }) {
     commit(types.CLEAR_GROUP_MODAL)
   },
   setGroupItem ({ commit, state }, data) {
+    console.log('the set group item data', data)
     return new Promise((resolve, reject) => {
       group.update(data).then(res => {
-        console.log('state actions update success', res)
-        commit(types.SET_GROUP_ITEM, {
-          index: data.index,
-          item: data.item
-        })
+        console.log('state actions update success', data)
+        // commit(types.SET_GROUP_ITEM, data)
         resolve(res)
       }).catch(err => {
         console.error('update group item err:', err)
@@ -85,8 +87,11 @@ const mutations = {
   [types.GET_GROUP_LIST_FAILURE] (state, err) {
     state.err = err
   },
+  [types.SET_EDIT_INDEX] (state, index) {
+    state.editIndex = index
+  },
   [types.SET_GROUP_ITEM] (state, data) {
-    state.list = update(data.index, data.item, state.list)
+    state.list = update(state.editIndex, data, state.list)
   },
   [types.DELETE_GROUP_ITEM] (state, data) {
     state.list = remove(data.index, 1, state.list)

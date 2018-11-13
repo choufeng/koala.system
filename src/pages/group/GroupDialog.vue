@@ -41,7 +41,6 @@ export default {
   },
   watch: {
     stateModal (val) {
-      console.log('new state modal', val)
       this.modal = clone(val)
     }
   },
@@ -73,7 +72,7 @@ export default {
         this.clearModal()
       }).catch(err => {
         console.log(err)
-        // this.$message.error(err)
+        this.$message.error('保存失败')
         this.setLoadingFalse()
       })
     },
