@@ -3,13 +3,17 @@ import { group } from '@/services'
 import { update, remove, append } from 'ramda'
 const state = {
   list: [],
-  dialogStatus: false
+  dialogStatus: false,
+  modal: {
+    name: '',
+    description: ''
+  }
 }
 
 const getters = {}
 
 const actions = {
-  getGroupList ({ commit, state}) {
+  getGroupList ({ commit, state }) {
     return new Promise((resolve, reject) => {
       group.list().then(result => {
         commit(types.GET_GROUP_LIST_SUCCESS, result)
@@ -20,20 +24,44 @@ const actions = {
       })
     })
   },
-  setGroupItem ({ commit, state }, data ) {
-    commit(types.SET_GROUP_ITEM, {
-      index: data.index,
-      item: data.item
+  setGroupModal ({ commit, state }, data) {
+    commit(types.SET_GROUP_MODAL, data)
+  },
+  clearGroupModal ({ commit, state }) {
+    commit(types.CLEAR_GROUP_MODAL)
+  },
+  setGroupItem ({ commit, state }, data) {
+    return new Promise((resolve, reject) => {
+      group.update(data).then(res => {
+        console.log('state actions update success', res)
+        commit(types.SET_GROUP_ITEM, {
+          index: data.index,
+          item: data.item
+        })
+        resolve(res)
+      }).catch(err => {
+        console.error('update group item err:', err)
+        reject(err)
+      })
     })
   },
   deleteGroupItem ({ commit, state }, data) {
-     commit(types.DELETE_GROUP_ITEM, {
-       index: data
-     })
+    return new Promise((resolve, reject) => {
+      group.delete(data.id).then(res => {
+        console.log('delete group item success', res)
+        commit(types.DELETE_GROUP_ITEM, {
+          index: data.index
+        })
+        resolve(res)
+      }).catch(err => {
+        console.log('delete group item error', err)
+        reject(err)
+      })
+    })
   },
   addGroupItem ({ commit, state }, data) {
     return new Promise((resolve, reject) => {
-      group.add(data).then(res => {
+      group.create(data).then(res => {
         console.log('state actions success', res)
         resolve(res)
       }).catch(err => {
@@ -71,6 +99,15 @@ const mutations = {
   },
   [types.CLOSE_GROUP_DIALOG] (state, data) {
     state.dialogStatus = false
+  },
+  [types.SET_GROUP_MODAL] (state, data) {
+    state.modal = data
+  },
+  [types.CLEAR_GROUP_MODAL] (state) {
+    state.modal = {
+      name: '',
+      description: ''
+    }
   }
 }
 

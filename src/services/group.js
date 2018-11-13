@@ -1,5 +1,5 @@
 import api from '@/api'
-import mock from './mock'
+import { dissoc } from 'ramda'
 const group = {
   list: () => {
     return new Promise((resolve, reject) => {
@@ -10,7 +10,7 @@ const group = {
       })
     })
   },
-  add: (data) => {
+  create: (data) => {
     return new Promise((resolve, reject) => {
       api.post('group', data).then(res => {
         resolve(res)
@@ -19,11 +19,23 @@ const group = {
       })
     })
   },
-  edit: (id, data) => {
-    return api.put(`group/${id}`, data)
+  update: (data) => {
+    return new Promise((resolve, reject) => {
+      api.put(`group/${data.id}`, dissoc('id', data)).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
   },
   delete: (id) => {
-    return api.delete(`group/${id}`)
+    return new Promise((resolve, reject) => {
+      api.delete(`group/${id}`).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
   }
 }
 export default group

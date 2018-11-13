@@ -1,6 +1,10 @@
 <template>
   <div class="dialog-box">
-    <el-dialog :title="title" :visible.sync="open" :before-close="cancel">
+    <el-dialog
+      :title="title"
+      :visible.sync="open"
+      :before-close="cancel"
+    >
       <slot></slot>
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancel">取 消</el-button>

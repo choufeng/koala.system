@@ -6,15 +6,15 @@
         <el-button type="primary" icon="el-icon-plus" size="small" @click="open">添加新权限组</el-button>
       </div>
       <div class="body">
-        <GroupList />
+        <group-list></group-list>
       </div>
     </panel-box>
-    <GroupDialog />
+    <group-dialog></group-dialog>
   </div>
 </template>
 
 <script>
-import { PanelBox, DialogBox } from '@/components'
+import { PanelBox } from '@/components'
 import GroupList from './GroupList.vue'
 import GroupDialog from './GroupDialog.vue'
 import { mapActions } from 'vuex'
@@ -23,8 +23,9 @@ export default {
     PanelBox, GroupDialog, GroupList
   },
   methods: {
-    ...mapActions(['openGroupDialog']),
+    ...mapActions(['openGroupDialog', 'clearGroupModal']),
     open () {
+      this.clearGroupModal()
       this.openGroupDialog()
     }
   }

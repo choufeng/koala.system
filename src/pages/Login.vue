@@ -10,7 +10,7 @@
             <el-input type="password" placeholder="Password" v-model="modal.password"/>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" plain @click="onSave" :disabled="disLoginBtn">登录</el-button>
+            <el-button type="primary" plain @click="onSave" :loading='loading' :disabled="disLoginBtn">登录</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -30,7 +30,8 @@ export default {
       modal: {
         username: 'choufeng',
         password: '123123'
-      }
+      },
+      loading: false
     }
   },
   computed: {
@@ -42,12 +43,20 @@ export default {
     this.$refs.inputUsername.focus()
   },
   methods: {
+    setLoadingTrue () {
+      this.loading = true
+    },
+    setLoadingFalse () {
+      this.loading = false
+    },
     async onSave () {
       try {
+        this.setLoadingTrue()
         const res = await system.login(this.modal)
         localforage.setItem('token', res.token)
         this.$message.success(LOGIN_SUCCESS)
         this.$router.push('/admin/dashboard')
+        this.setLoadingFalse()
       } catch (err) {
         this.$message.error(err.message)
       }

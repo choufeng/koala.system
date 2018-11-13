@@ -18,7 +18,8 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import DialogBox from '@/components/DialogBox'
-import { ADD_SUCCESS } from '@/consts'
+import { DONE } from '@/consts'
+import { clone, has } from 'ramda'
 export default {
   components: {
     DialogBox
@@ -34,11 +35,18 @@ export default {
   },
   computed: {
     ...mapState({
-      open: state => state.group.dialogStatus
+      open: state => state.group.dialogStatus,
+      stateModal: state => state.group.modal
     })
   },
+  watch: {
+    stateModal (val) {
+      console.log('new state modal', val)
+      this.modal = clone(val)
+    }
+  },
   methods: {
-    ...mapActions(['closeGroupDialog', 'addGroupItem', 'getGroupList']),
+    ...mapActions(['closeGroupDialog', 'addGroupItem', 'getGroupList', 'setGroupItem']),
     setLoadingTrue () {
       this.loading = true
     },
@@ -52,18 +60,22 @@ export default {
       }
     },
     onSave () {
+      has('id', this.modal) ? this.doSave(this.setGroupItem, this.modal) : this.doSave(this.addGroupItem, this.modal)
+    },
+    doSave (action, data) {
       this.setLoadingTrue()
-      this.addGroupItem(this.modal).then(() => {
-        this.$message.success(ADD_SUCCESS)
+      console.log('test', data)
+      action(data).then(() => {
+        this.$message.success(DONE)
         this.setLoadingFalse()
         this.getGroupList()
         this.closeGroupDialog()
         this.clearModal()
       }).catch(err => {
-        this.$message.error(err)
+        console.log(err)
+        // this.$message.error(err)
         this.setLoadingFalse()
       })
-      console.log('save')
     },
     onCancel () {
       this.setLoadingFalse()
