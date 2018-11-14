@@ -35,7 +35,6 @@ export default {
   },
   mounted () {
     this.setDataSource(this.formatDataSource(nodes))
-    console.log(this.value.row)
     this.setDataValues(prop('nodekeys')(this.value.row))
   },
   props: ['value'],
@@ -58,7 +57,6 @@ export default {
       this.dataValues = isNotArray(list) ? [] : list
     },
     handleChange (v) {
-      console.log('change v', v)
       // 1. 组织新的row 2. api update 3， setState， 4. 消息提示？
       const row = assoc('nodekeys', v, this.value.row)
       const data = { index: this.value.$index, item: row }

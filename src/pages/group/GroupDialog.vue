@@ -67,7 +67,6 @@ export default {
       action(data).then(() => {
         this.$message.success(DONE)
         this.setLoadingFalse()
-        this.getGroupList()
         this.closeGroupDialog()
         this.clearModal()
       }).catch(err => {

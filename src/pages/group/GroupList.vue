@@ -35,9 +35,11 @@
         <template slot-scope="scope">
           <el-row>
             <el-col :span="12">
-              <el-button
-                size="mini"
-                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              <group-modal
+                :value="scope"
+                btnType="default"
+                btnTitle="编辑"
+              ></group-modal>
             </el-col>
             <el-col :span="12">
               <delete-popover
@@ -58,11 +60,12 @@ import { mapActions, mapState } from 'vuex'
 import { assoc } from 'ramda'
 import DeletePopover from '@/components/DeletePopover'
 import GroupNodes from './GroupNodes.vue'
+import GroupModal from './GroupModal'
 import { DONE } from '@/consts'
 
 export default {
   components: {
-    DeletePopover, GroupNodes
+    DeletePopover, GroupNodes, GroupModal
   },
   data () {
     return {
@@ -87,10 +90,8 @@ export default {
     handleNodes (i, item) {
       this.setGroupItem({ index: i, item: assoc('name', `${item.name}1`, item) })
     },
-    handleEdit (i, item) {
-      this.setEditIndex(i)
-      this.setGroupModal(item)
-      this.openGroupDialog()
+    handleUpdate (item) {
+      this.$emit('onEdit', item)
     },
     handleDelete (data) {
       this.$message.info('删除中...')
