@@ -62,6 +62,7 @@ import DeletePopover from '@/components/DeletePopover'
 import GroupNodes from './GroupNodes.vue'
 import GroupModal from './GroupModal'
 import { DONE } from '@/consts'
+import utils from '@/utils'
 
 export default {
   components: {
@@ -81,10 +82,13 @@ export default {
     ...mapActions(['getGroupList', 'setGroupItem', 'setEditIndex', 'deleteGroupItem', 'openGroupDialog', 'setGroupModal']),
     async loadList () {
       try {
+        utils.loading.open()
         await this.getGroupList()
+        utils.loading.close()
       } catch (err) {
         this.$message.error('载入列表出现错误')
         console.log('Load list Error:', err)
+        utils.loading.close()
       }
     },
     handleNodes (i, item) {

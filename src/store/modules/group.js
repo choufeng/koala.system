@@ -35,11 +35,10 @@ const actions = {
     commit(types.CLEAR_GROUP_MODAL)
   },
   setGroupItem ({ commit, state }, data) {
-    console.log('the set group item data', data)
     return new Promise((resolve, reject) => {
-      group.update(data).then(res => {
+      group.update(data.item).then(res => {
         console.log('state actions update success', data)
-        // commit(types.SET_GROUP_ITEM, data)
+        commit(types.SET_GROUP_ITEM, data)
         resolve(res)
       }).catch(err => {
         console.error('update group item err:', err)
@@ -91,7 +90,7 @@ const mutations = {
     state.editIndex = index
   },
   [types.SET_GROUP_ITEM] (state, data) {
-    state.list = update(state.editIndex, data, state.list)
+    state.list = update(data.index, data.item, state.list)
   },
   [types.DELETE_GROUP_ITEM] (state, data) {
     state.list = remove(data.index, 1, state.list)

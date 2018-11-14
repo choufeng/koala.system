@@ -60,6 +60,7 @@ export default {
       // 1. 组织新的row 2. api update 3， setState， 4. 消息提示？
       const row = assoc('nodekeys', v, this.value.row)
       const data = { index: this.value.$index, item: row }
+      console.log('the group nodekeys change:', data)
       this.setGroupItem(data).then(() => {
         this.$message.success(DONE)
       }).catch(err => {

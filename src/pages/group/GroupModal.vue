@@ -71,7 +71,7 @@ export default {
       this.loading = false
     },
     onSave () {
-      has('id', this.modal) ? this.doSave(this.setGroupItem, this.modal) : this.doSave(this.addGroupItem, this.modal)
+      has('id', this.modal) ? this.doSave(this.setGroupItem, { item: this.modal, index: this.value.$index }) : this.doSave(this.addGroupItem, this.modal)
     },
     doSave (action, data) {
       this.beginLoading()
