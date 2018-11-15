@@ -45,7 +45,7 @@ export default new Router({
         {
           path: 'manager',
           name: 'manager',
-          component: () => import('./pages/Dashboard')
+          component: () => import('./pages/manager/Manager')
         },
         {
           path: 'category',
