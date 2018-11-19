@@ -5,3 +5,5 @@ node_js:
 script:
   - "npm run test"
   - "npm run build"
+notifications:
+  webhooks: https://hook.bearychat.com/=bwAhA/travis/45ca489650e3abfd2fbfb7287edb719e
