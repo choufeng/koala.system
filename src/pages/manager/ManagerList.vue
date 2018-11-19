@@ -2,8 +2,8 @@
   <div class="manager-list">
     <el-table
       :data="list"
-      height="80vh"
-      border
+      height="78vh"
+      :highlight-current-row="true"
       :default-sort="{prop: 'id', order: 'ascending'}"
       style="width: 100%">
       <el-table-column
@@ -68,7 +68,7 @@ export default {
     this.getManagerList()
   },
   methods: {
-    ...mapActions(['getManagerList', 'setManagerItem', 'deleteManagerItem']),
+    ...mapActions(['getManagerList', 'deleteManagerItem']),
     handleDelete (data) {
       this.$message.info('删除中...')
       this.deleteManagerItem({ id: data.row.id, index: data.$index }).then(() => {

@@ -13,6 +13,9 @@
       <div class="body">
         <group-list @onEdit="open"></group-list>
       </div>
+    <div class="text-left pl1" slot="footer">
+      <p>Tips: 权限组方便将具有同样权限的人员归纳统一管理</p>
+    </div>
     </panel-box>
     <group-dialog></group-dialog>
   </div>
@@ -41,8 +44,5 @@ export default {
 
 <style lang="less">
 .group {
-  .body {
-    padding: 1rem;
-  }
 }
 </style>

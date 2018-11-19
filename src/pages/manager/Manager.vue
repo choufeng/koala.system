@@ -14,6 +14,9 @@
       <div class="body">
         <manager-list></manager-list>
       </div>
+    <div class="footer text-left pl1" slot="footer">
+      <p>Tips: 新建用户初始密码是： 123456</p>
+    </div>
     </panel-box>
   </div>
 </template>

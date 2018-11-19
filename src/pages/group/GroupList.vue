@@ -3,7 +3,7 @@
     <el-table
       :data="list"
       height="80vh"
-      border
+      :highlight-current-row="true"
       :default-sort="{prop: 'id', order: 'ascending'}"
       style="width: 100%">
       <el-table-column

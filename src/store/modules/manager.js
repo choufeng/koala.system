@@ -20,6 +20,7 @@ const actions = {
     })
   },
   setManagerItem ({ commit, state }, data) {
+    console.log('this is set')
     return new Promise((resolve, reject) => {
       manager.update(data.item).then(result => {
         commit(types.SET_MANAGER_ITEM, data)
@@ -40,10 +41,13 @@ const actions = {
     })
   },
   addManagerItem ({ commit, state }, data) {
+    console.log('this is add', data)
     return new Promise((resolve, reject) => {
       manager.create(data).then(result => {
+        console.log('is this state resolve', result)
         resolve(result)
       }).catch(err => {
+        console.log('is this state reject')
         reject(err)
       })
     })

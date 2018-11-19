@@ -12,6 +12,8 @@
       <el-col :span="24" class="content">
         <slot />
       </el-col>
+    </el-row>
+    <el-row>
       <el-col :span="24" class="footer">
         <slot name="footer" />
       </el-col>
@@ -24,11 +26,12 @@
   border-radius: 5px;
   background: #FFF;
   .header {
-    border-bottom: 3px solid #ebece3;
+    border-bottom: 3px solid #eaecef;
   }
   .content {
   }
   .footer {
+    color: #888;
   }
 }
 </style>
