@@ -57,7 +57,6 @@
 </template>
 <script charset="utf-8">
 import { mapActions, mapState } from 'vuex'
-import { assoc } from 'ramda'
 import DeletePopover from '@/components/DeletePopover'
 import GroupNodes from './GroupNodes.vue'
 import GroupModal from './GroupModal'
@@ -90,12 +89,6 @@ export default {
         console.log('Load list Error:', err)
         utils.loading.close()
       }
-    },
-    handleNodes (i, item) {
-      this.setGroupItem({ index: i, item: assoc('name', `${item.name}1`, item) })
-    },
-    handleUpdate (item) {
-      this.$emit('onEdit', item)
     },
     handleDelete (data) {
       this.$message.info('删除中...')

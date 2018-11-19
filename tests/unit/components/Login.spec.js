@@ -7,7 +7,8 @@ localVue.use(ElementUI)
 describe('Login', () => {
   it('has username and password', () => {
     const wp = shallowMount(LoginPage, {
-      localVue
+      localVue,
+      ref: 'inputUsername'
     })
     expect(wp.vm.$data.modal.username).toBe('')
     expect(wp.vm.$data.modal.password).toBe('')

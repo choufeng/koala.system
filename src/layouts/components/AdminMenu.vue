@@ -9,7 +9,7 @@
           :router="true"
           default-active="1"
           class="el-menu"
-          background-color="#661a1a"
+          background-color="#7b2a21"
           text-color="#fff"
           active-text-color="#f57f17">
           <el-menu-item index="1" route="/admin/dashboard">

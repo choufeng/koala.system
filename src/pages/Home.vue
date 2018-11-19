@@ -25,6 +25,6 @@ export default {
   height: 100vh;
   line-height: 100vh;
   text-align: center;
-  background: #661a1a;
+  background: #7b2a21;
 }
 </style>

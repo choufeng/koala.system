@@ -27,7 +27,7 @@ export default {
 <style lang="less" scoped>
 .basic-layout {
   .left {
-    background: #661a1a;
+    background: #7b2a21;
     height: 100vh;
     color: #fff;
     width: 3rem;
@@ -43,7 +43,7 @@ export default {
   .main {
     height: 94vh;
     max-height: 94vh;
-    background: #ecebe3;
+    background: #eaecef;
     overflow: hidden;
   }
 }

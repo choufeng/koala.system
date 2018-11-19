@@ -2,7 +2,7 @@
   <div class="global-header">
     <el-row>
       <el-col :span="20" class="text-left pl1">
-        <div class="title">Title</div>
+        <div class="title">Koala.System</div>
       </el-col>
       <el-col :span="4" class="text-right pr1">
         <el-dropdown size="medium" @command="handleCommand">

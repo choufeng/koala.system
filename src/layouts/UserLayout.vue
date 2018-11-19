@@ -28,7 +28,7 @@ export default {
 .userlayout {
   .left {
     height: 100vh;
-    background: #661a1a;
+    background: #7b2a21;
     line-height: 100vh;
     img {
       vertical-align: middle;
