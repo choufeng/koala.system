@@ -4,7 +4,7 @@
       <el-col :span="24">
         <el-form>
           <el-form-item>
-            <el-input placeholder="Username" v-model="modal.username" ref="inputUsername"/>
+            <el-input placeholder="Username" v-model="modal.username" autofocus="true" ref="inputUsername"/>
           </el-form-item>
           <el-form-item>
             <el-input type="password" placeholder="Password" v-model="modal.password"/>
@@ -28,8 +28,8 @@ export default {
   data () {
     return {
       modal: {
-        username: 'choufeng',
-        password: '123123'
+        username: '',
+        password: ''
       },
       loading: false
     }
@@ -40,7 +40,6 @@ export default {
     }
   },
   mounted () {
-    this.$refs.inputUsername.focus()
   },
   methods: {
     setLoadingTrue () {
@@ -59,6 +58,7 @@ export default {
         this.setLoadingFalse()
       } catch (err) {
         this.$message.error(err.message)
+        this.setLoadingFalse()
       }
     }
   }
