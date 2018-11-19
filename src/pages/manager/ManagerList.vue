@@ -10,42 +10,38 @@
         prop="id"
         label="ID"
         sortable
+        align="center"
         width="80">
       </el-table-column>
       <el-table-column
-        prop="name"
-        label="组名称"
-        width="180">
+        prop="username"
+        label="用户名"
+        >
       </el-table-column>
       <el-table-column
-        prop="description"
-        label="简介">
+        prop="phone"
+        label="电话">
       </el-table-column>
       <el-table-column
-        label="权限集"
-        width="150"
+        label="权限组"
+        width="180"
         >
-        <template slot-scope="scope">
-          <group-nodes :value="scope"></group-nodes>
-        </template>
       </el-table-column>
-      <el-table-column label="操作"
-        width="150"
-        >
+      <el-table-column label="操作" width="180">
         <template slot-scope="scope">
           <el-row>
             <el-col :span="12">
-              <group-modal
+              <manager-modal
                 :value="scope"
                 btnType="default"
                 btnTitle="编辑"
-              ></group-modal>
+              ></manager-modal>
             </el-col>
             <el-col :span="12">
               <delete-popover
-                :confirmValue="scope.row.name"
+                :confirmValue="scope.row.username"
                 :value="scope"
-                msg="警告：删除权限组将导致该组成员失去对应权限，请慎重操作，输入<b>组名称</b>以确认删除"
+                msg="警告：删除用户请输入<b>用户名</b>以确认删除"
                 @onSubmit="handleDelete"
               ></delete-popover>
             </el-col>
@@ -57,10 +53,30 @@
 </template>
 
 <script charset="utf-8">
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import ManagerModal from './ManagerModal.vue'
+import DeletePopover from '@/components/DeletePopover'
+import { DONE } from '@/consts'
 export default {
+  components: {
+    ManagerModal, DeletePopover
+  },
   computed: mapState({
     list: state => state.manager.list
-  })
+  }),
+  mounted () {
+    this.getManagerList()
+  },
+  methods: {
+    ...mapActions(['getManagerList', 'setManagerItem', 'deleteManagerItem']),
+    handleDelete (data) {
+      this.$message.info('删除中...')
+      this.deleteManagerItem({ id: data.row.id, index: data.$index }).then(() => {
+        this.$message.success(DONE)
+      }).catch(() => {
+        this.$message.error('删除出错了，未成功')
+      })
+    }
+  }
 }
 </script>
