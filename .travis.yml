@@ -7,3 +7,5 @@ script:
   - "npm run build"
 notifications:
   webhooks: https://hook.bearychat.com/=bwAhA/travis/45ca489650e3abfd2fbfb7287edb719e
+  on_failure: aways
+  on_success: change
