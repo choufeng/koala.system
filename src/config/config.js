@@ -5,7 +5,7 @@
  * permission: //这里配置的是该项目可使用的菜单项, 内容对应nodes中的项目
 **/
 const config = {
-  baseURL: 'http://localhost:3000/',
+  baseURL: 'http://koala-api.ycc.im/',
   permission: [
     'insider',
     'insider.group',

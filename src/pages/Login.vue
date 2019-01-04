@@ -4,7 +4,7 @@
       <el-col :span="24">
         <el-form>
           <el-form-item>
-            <el-input placeholder="Username" v-model="modal.username" autofocus="true" ref="inputUsername"/>
+            <el-input placeholder="Phone" v-model="modal.phone" autofocus="true" ref="inputUsername"/>
           </el-form-item>
           <el-form-item>
             <el-input type="password" placeholder="Password" v-model="modal.password"/>
@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       modal: {
-        username: '',
+        phone: '',
         password: ''
       },
       loading: false
@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     disLoginBtn () {
-      return isEmpty(this.modal.username) || isEmpty(this.modal.password)
+      return isEmpty(this.modal.phone) || isEmpty(this.modal.password)
     }
   },
   mounted () {
@@ -57,7 +57,8 @@ export default {
         this.$router.push('/admin/dashboard')
         this.setLoadingFalse()
       } catch (err) {
-        this.$message.error(err.message)
+        console.log('login err:', err.response)
+        this.$message.error(err.response.data.errorMessage)
         this.setLoadingFalse()
       }
     }

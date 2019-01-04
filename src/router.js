@@ -48,14 +48,14 @@ export default new Router({
           component: () => import('./pages/manager/Manager')
         },
         {
-          path: 'category',
-          name: 'category',
-          component: () => import('./pages/Dashboard')
-        },
-        {
           path: 'article',
           name: 'article',
           component: () => import('./pages/Dashboard')
+        },
+        {
+          path: 'category',
+          name: 'category',
+          component: () => import('./pages/category/Category')
         }
       ]
     }
